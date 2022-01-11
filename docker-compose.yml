@@ -3,8 +3,6 @@ version: "3.9"
 services:
   mom:
     image: njmittet/alpine-activemq
-    networks:
-      - main
 
   section-1-control-station:
     image: control-station:0.0.1-SNAPSHOT
@@ -15,7 +13,4 @@ services:
     image: timing-station:0.0.1-SNAPSHOT
     environment:
       SECTION: 1
-      TIMING_STATION: 1
-networks:
-  main:
-    driver: bridge
+      TIMING_STATION: 001

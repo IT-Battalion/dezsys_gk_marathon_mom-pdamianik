@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function clear(output) {
+    output.empty();
+
+    let headRow = document.createElement("tr");
+
+    let elem = document.createElement("th");
+    elem.innerText = "partyid";
+    headRow.append(elem);
+
+    elem = document.createElement("th");
+    elem.innerText = "time";
+    headRow.append(elem);
+
+    output.append(headRow);
+}
+
+function display(output, data) {
+    clear(output);
+
+    for (let dataRow of data) {
+        let row = document.createElement('tr');
+
+        let elem = document.createElement("td");
+        elem.innerText = dataRow["partyId"];
+        row.append(elem);
+
+        elem = document.createElement("td");
+        elem.innerText = dataRow["timing"];
+        row.append(elem);
+
+        output.append(row);
+    }
+}
+$(document).ready(function() {
+    $.ajax({
+        url: "/data/json"
+    }).then(function(data) {
+        $('#timingstationID').text(data.timingstationID);
+        $('#timestamp').text(data.timestamp);
+
+        console.debug(data);
+
+        display($("#parties"), data["competitionData"]["parties"]);
+    });
+});
+</script>
+<body>
+	<div id="timingstationID"></div>
+	<div id="timestamp"></div>
+    <table id="parties"></table>
+</body>
+</html>
