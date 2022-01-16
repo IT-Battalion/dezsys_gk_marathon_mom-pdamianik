@@ -3,14 +3,45 @@ version: "3.9"
 services:
   mom:
     image: njmittet/alpine-activemq
+    ports:
+      - "61616:61616"
+      - "8161:8161"
 
   section-1-control-station:
     image: control-station:0.0.1-SNAPSHOT
     environment:
       SECTION: 1
+    ports:
+      - "8080:8080"
 
   section-1-timing-station-1:
     image: timing-station:0.0.1-SNAPSHOT
     environment:
       SECTION: 1
-      TIMING_STATION: 001
+      TIMING_STATION: 1
+    ports:
+      - "8081:8080"
+
+  section-1-timing-station-2:
+    image: timing-station:0.0.1-SNAPSHOT
+    environment:
+      SECTION: 1
+      TIMING_STATION: 2
+    ports:
+      - "8082:8080"
+
+  section-1-timing-station-3:
+    image: timing-station:0.0.1-SNAPSHOT
+    environment:
+      SECTION: 1
+      TIMING_STATION: 3
+    ports:
+      - "8083:8080"
+
+  section-1-timing-station-4:
+    image: timing-station:0.0.1-SNAPSHOT
+    environment:
+      SECTION: 1
+      TIMING_STATION: 4
+    ports:
+      - "8084:8080"

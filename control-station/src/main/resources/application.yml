@@ -1,0 +1,3 @@
+active-mq:
+  broker-url: 'tcp://mom:61616'
+  queue: 'section.${SECTION}.timing-station.*'

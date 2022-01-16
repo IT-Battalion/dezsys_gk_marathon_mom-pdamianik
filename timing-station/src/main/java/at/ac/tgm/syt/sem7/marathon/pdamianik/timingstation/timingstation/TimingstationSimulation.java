@@ -29,7 +29,7 @@ public class TimingstationSimulation {
 		List<Party> parties = new ArrayList<>();
 
 		double factor = Math.cos(stationId/42.0);
-		int partyCount = (int) ((43 - stationId) * 5 * factor + getRandomInt((int)(-10*factor), (int)(10*factor)));
+		int partyCount = getRandomInt(0, 10);
 
 		for (int i = 0; i < partyCount; i++) {
 			Party pary = new Party(
@@ -67,6 +67,10 @@ public class TimingstationSimulation {
 	}
 	
 	public TimingstationData getData() {
+		return this.data;
+	}
+
+	public TimingstationData updateData() {
 		List<Party> parties = this.data.getCompetitionData().getParties();
 
 		for (int i = 0; i < getRandomInt(0, 10); i++) {
@@ -77,7 +81,16 @@ public class TimingstationSimulation {
 			parties.add(pary);
 		}
 
-		return this.data;
+		WeatherData weatherData = new WeatherData(
+				getRandomDouble(0, 50),
+				getRandomDouble(25, 35),
+				getRandomInt(0, 50) != 0 ? 0 : getRandomDouble(1, 50),
+				getRandomDouble(999, 1111)
+		);
+
+		this.data.setWeatherData(weatherData);
+
+		return data;
 	}
 
 }
